@@ -1,16 +1,19 @@
 async function getData(apikey) {
     try {
         const result = await fetch(
-            `https://api.nasa.gov/insight_weather/?api_key=${apikey}&feedtype=json&ver=1.0`
+            `https://api.nasa.gov/EPIC/api/natural?api_key=${apikey}`
         );
-        const infoFromServer = await result.json();
+        const epicServer = await result.json();
 
-        const content = document.querySelector("insight-weather");
+        const content = document.querySelector("#EPIC");
         content.innerHTML = `
-        <p> ${infoFromServer.validity_checks.sol_hours_required}
+        <p> 
+            <img src="${epicServer.image} " alt="${epicServer.caption} "/>
+            ${epicServer.caption} 
+        </p>
     `;
     } catch (error) {
-        console.log('Error: ', error);
+        console.log(`Error: `, error);
     }
 }
 
