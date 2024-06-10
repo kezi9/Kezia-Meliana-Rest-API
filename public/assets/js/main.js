@@ -1,17 +1,19 @@
 async function getData(apikey) {
     try {
         const result = await fetch(
-            `https://api.nasa.gov/EPIC/api/natural?api_key=${apikey}`
+            `https://api.nasa.gov/planetary/apod?api_key=${apikey}`
         );
-        const epicServer = await result.json();
+        const epicInfoServer = await result.json()
 
-        const content = document.querySelector("#EPIC");
+        // console.log(epicInfoServer);
+        const content = document.querySelector("#APOD");
         content.innerHTML = `
-        <p> 
-            <img src="${epicServer.image} " alt="${epicServer.caption} "/>
-            ${epicServer.caption} 
+        <h1>${epicInfoServer.title}</h1>
+        <img src="${epicInfoServer.url}" alt="${epicInfoServer.media_type}"/>
+        <p>
+            ${epicInfoServer.explanation}
         </p>
-    `;
+        `;
     } catch (error) {
         console.log(`Error: `, error);
     }
