@@ -1,0 +1,29 @@
+* {
+  background-color: rgb(3, 1, 15);
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: 18px;
+}
+
+h1, h2 {
+  font-family: "Zen Dots", sans-serif;
+  text-align: center;
+}
+
+section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+section img {
+  width: 70%;
+}
+section p {
+  text-align: justify;
+}
+
+/*# sourceMappingURL=style.css.map */

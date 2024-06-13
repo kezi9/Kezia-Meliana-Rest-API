@@ -1,0 +1,39 @@
+$primary-color: rgb(3, 1, 15);
+$secondary-color: white;
+
+$font-primary: "Zen Dots", sans-serif;
+$font-secondary: "Rubik", sans-serif;
+
+* {
+    background-color: $primary-color;
+    color: $secondary-color;
+    font-family: $font-secondary;
+    font-size: 18px;
+}
+
+@mixin headings {
+    font-family: $font-primary;
+    text-align: center;
+}
+
+h1, h2 {
+    @include headings();
+}
+
+section {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    img {
+        width: 70%;
+    }
+
+    p {
+        text-align: justify;
+    }
+}
