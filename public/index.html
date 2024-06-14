@@ -11,26 +11,44 @@
     <!-- EXTERNAL CSS LINK -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Zen+Dots&display=swap"
+        rel="stylesheet">
+
     <title>NASA</title>
 </head>
 
 <body>
-    <!-- Website Title -->
-    <h1>NASA</h1>
+    <header>
+        <!-- Website Page -->
+        <h1>Astronomy Picture of the Day</h1>
 
-    <!-- HEADING -->
-    <h2 id="APOD-title"></h2>
-    <div id="APOD-date"></div>
-    
+        <!-- HEADING -->
+        <h2 id="APOD-title"></h2>
+        <section class="date">
+            <div id="APOD-date"></div>
+
+            <!-- Interaction -->
+            <input id="APOD-inputDate" type="date"></input>
+        </section>
+    </header>
+
     <hr>
 
-    <!-- Content -->
-    <section id="APOD-content"></section>
+    <main>
+        <!-- Content -->
+        <section class="contentSection" id="APOD-content"></section>
+    </main>
 
     <hr>
 
-    <!-- Interaction -->
-    <input id="APOD-inputDate" type="date"></input>
+    <footer>
+        <p>Image credit: <a href="https://www.nasa.gov/"> NASA</a>, <a href="https://www.esa.int/">ESA</a>, <a href="https://hubblesite.org/images/hubble-heritage">Hubble Heritage</a> (STScI/AURA)-ESA/Hubble Collaboration. </p>
+        <p>Acknowledgement: Davide De Martin and Robert Gendler.</p>
+    </footer>
 
     <!-- SCRIPT FOR JAVASCRIPT -->
     <script src="assets/js/main.js"></script>

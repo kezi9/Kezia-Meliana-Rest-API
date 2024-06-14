@@ -1,0 +1,70 @@
+* {
+  background-color: rgb(3, 1, 15);
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-size: 22px;
+}
+
+h1 {
+  font-family: "Zen Dots", sans-serif;
+  text-align: center;
+  font-size: 30px;
+}
+
+h2 {
+  font-family: "Zen Dots", sans-serif;
+  text-align: center;
+  font-size: 30px;
+  font-size: 40px;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
+
+.date {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-direction: row;
+}
+
+.contentSection {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.contentSection img {
+  width: 60%;
+  border: 3px double whitesmoke;
+  padding: 20px;
+}
+.contentSection p {
+  width: 80%;
+  text-align: center;
+}
+
+hr {
+  width: 80%;
+  border: 3px solid rgb(160, 160, 160);
+  border-radius: 5px;
+}
+
+footer p, footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=style.css.map */
