@@ -23,6 +23,12 @@ $font-secondary: "Rubik", sans-serif;
     gap: 20px;
 }
 
+@mixin frames {
+    width: 60%;
+    border: 3px double whitesmoke;
+    padding: 20px;
+}
+
 // --------
 * {
     background-color: $primary-color;
@@ -54,9 +60,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     @include section();
 
     img {
-        width: 60%;
-        border: 3px double whitesmoke;
-        padding: 20px;
+        @include frames();
+    }
+
+    iframe {
+        @include frames();
+        height: 60%;
     }
 
     p {
