@@ -2,29 +2,33 @@
 // let apikey = process.env.APIKEY
 // console.log(apikey);
 
-async function getData(apikey) {
+// Pick date, Sync date & data
+// document.getElementById("APOD-inputDate").addEventListener('change', async function () {
+//     const date = this.value;
+//     if (date) {
+//         try {
+//             const data = getData(date);
+//             displayData(data);
+//         } catch {
+//             console.error('Error Fetching Date:', error);
+//         }
+//     }
+// });
+
+async function getData(date, apikey) {
     try {
         // -- NASA API
         // Astronomy Picture of the Day
         const result = await fetch(
-            `https://api.nasa.gov/planetary/apod?api_key=${apikey}`
+            `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apikey}`
         );
-        // 
-        const prevDate = await fetch(
-            `https://api.nasa.gov/planetary/apod?date=2024-06-09&api_key=${apikey}`
-        );
-        const APODServer = await result.json()
-        const dateServer = await prevDate.json()
 
-        // console.log(dateServer);
-        // console.log(APODServer);
+        const APODServer = await result.json()
 
         // HTML calls
-        const content = document.querySelector("#APOD");
         const apodTitle = document.querySelector("#APOD-title");
         const apodDate = document.querySelector("#APOD-date");
         const apodContent = document.querySelector("#APOD-content");
-        const apodInputDate = document.querySelector("#APOD-inputDate");
 
         // HTML ADD
         // -- Heading
@@ -32,39 +36,29 @@ async function getData(apikey) {
         apodDate.innerHTML = `${APODServer.date}`;
 
         // -- Content
-        apodContent.innerHTML = `
-            <img src="${APODServer.url}" alt="${APODServer.media_type}"/>
-            <p>
-                ${APODServer.explanation}
-            </p>
+        // Image/Video
+        if (APODServer.media_type === 'image') {
+            apodContent.innerHTML = `
+                <img src="${APODServer.url}" alt="${APODServer.title}"/>
+                `;
+        } else if (APODServer.media_type === 'video') {
+            apodContent.innerHTML = `
+                <iframe src="${APODServer.url}" alt="${APODServer.title} frameborder="0" allowfullscreen></iframe>
+            `;
+        }
+
+        // Explanation
+        apodContent.innerHTML += `
+            <p>${APODServer.explanation}</p>
         `;
 
-        // -- Interaction
-        // if {
-        //     const apodInputDate = document.querySelector("#APOD-inputDate").value = "2024-06-09"
+        // -- Calendar
+        // const datePicker = document.querySelector("#APOD-inputDate").value = `2024-06-12`;
+        // console.log(datePicker);
 
-        //     apodInputDate.innerHTML = `
-        //         ${dateServer.title}
-        //         ${dateServer.url}
-        //         ${dateServer.date}
-        //         ${dateServer.explanation}
-        //     `
-        // } else {
-        //     ''
-        // };
-
-
-        // example
-        // content.innerHTML = `
-        // <h1>${APODServer.title}</h1>
-        // <img src="${APODServer.url}" alt="${APODServer.media_type}"/>
-        // <p>
-        //     ${APODServer.explanation}
-        // </p>
-        // `;
     } catch (error) {
         console.log(`Error: `, error);
     }
 }
 
-getData('M1btDj4lbefGAvrMNonTpVOFazU2kdxkNz5WfWvU');
+getData('', 'M1btDj4lbefGAvrMNonTpVOFazU2kdxkNz5WfWvU');
