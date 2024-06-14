@@ -22,25 +22,33 @@
 </head>
 
 <body>
-    <!-- Website Title -->
-    <h1>NASA</h1>
+    <header>
+        <!-- Website Page -->
+        <h1>Astronomy Picture of the Day</h1>
 
-    <!-- HEADING -->
-    <h2 id="APOD-title"></h2>
-    <section>
-        <div id="APOD-date"></div>
+        <!-- HEADING -->
+        <h2 id="APOD-title"></h2>
+        <section class="date">
+            <div id="APOD-date"></div>
 
-        <!-- Interaction -->
-        <input id="APOD-inputDate" type="date"></input>
-    </section>
-
-    <hr>
-
-    <!-- Content -->
-    <section id="APOD-content"></section>
+            <!-- Interaction -->
+            <input id="APOD-inputDate" type="date"></input>
+        </section>
+    </header>
 
     <hr>
 
+    <main>
+        <!-- Content -->
+        <section class="contentSection" id="APOD-content"></section>
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>Image credit: <a href="https://www.nasa.gov/"> NASA</a>, <a href="https://www.esa.int/">ESA</a>, <a href="https://hubblesite.org/images/hubble-heritage">Hubble Heritage</a> (STScI/AURA)-ESA/Hubble Collaboration. </p>
+        <p>Acknowledgement: Davide De Martin and Robert Gendler.</p>
+    </footer>
 
     <!-- SCRIPT FOR JAVASCRIPT -->
     <script src="assets/js/main.js"></script>
