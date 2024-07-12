@@ -2,63 +2,62 @@
 // let apikey = process.env.APIKEY
 // console.log(apikey);
 
-// Pick date, Sync date & data
-// document.getElementById("APOD-inputDate").addEventListener('change', async function () {
-//     const date = this.value;
-//     if (date) {
-//         try {
-//             const data = getData(date);
-//             displayData(data);
-//         } catch {
-//             console.error('Error Fetching Date:', error);
-//         }
-//     }
-// });
+// Set Date
+document.getElementById('APOD-inputDate').addEventListener('change', async function () {
+    const date = this.value; // Get the selected date
+    if (date) {
+        try {
+            const data = await fetchData(date); // Fetch data for the selected date
+        } catch (error) {
+            console.error('Error fetching APOD data:', error);
+        }
+    }
+});
 
-async function getData(date, apikey) {
+// Fetch DATA API selection date
+async function fetchData(date) {
+    const apiKey = 'M1btDj4lbefGAvrMNonTpVOFazU2kdxkNz5WfWvU';
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${date}`);
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    const data = await response.json();
+
     try {
-        // -- NASA API
-        // Astronomy Picture of the Day
-        const result = await fetch(
-            `https://api.nasa.gov/planetary/apod?date=${date}&api_key=${apikey}`
-        );
+        const titleElement = document.getElementById('APOD-title');
+        const contentElement = document.getElementById('APOD-content');
 
-        const APODServer = await result.json()
+        // Title
+        titleElement.textContent = data.title;
 
-        // HTML calls
-        const apodTitle = document.querySelector("#APOD-title");
-        const apodDate = document.querySelector("#APOD-date");
-        const apodContent = document.querySelector("#APOD-content");
-
-        // HTML ADD
-        // -- Heading
-        apodTitle.innerHTML = `${APODServer.title}`;
-        apodDate.innerHTML = `${APODServer.date}`;
-
-        // -- Content
-        // Image/Video
-        if (APODServer.media_type === 'image') {
-            apodContent.innerHTML = `
-                <img src="${APODServer.url}" alt="${APODServer.title}"/>
-                `;
-        } else if (APODServer.media_type === 'video') {
-            apodContent.innerHTML = `
-                <iframe src="${APODServer.url}" alt="${APODServer.title} frameborder="0" allowfullscreen></iframe>
-            `;
+        // Display the image or video
+        if (data.media_type === 'image') {
+            contentElement.innerHTML = `<img src="${data.url}" alt="${data.title}" style="max-width: 100%;">`;
+        } else if (data.media_type === 'video') {
+            contentElement.innerHTML = `<iframe src="${data.url}" frameborder="0" allowfullscreen></iframe>`;
         }
 
         // Explanation
-        apodContent.innerHTML += `
-            <p>${APODServer.explanation}</p>
-        `;
-
-        // -- Calendar
-        // const datePicker = document.querySelector("#APOD-inputDate").value = `2024-06-12`;
-        // console.log(datePicker);
-
+        contentElement.innerHTML += `<p>${data.explanation}</p>`;
     } catch (error) {
         console.log(`Error: `, error);
     }
+
+    return data;
 }
 
-getData('', 'M1btDj4lbefGAvrMNonTpVOFazU2kdxkNz5WfWvU');
+// Fetch current date + data
+document.addEventListener('DOMContentLoaded', async function () {
+    const today = new Date().toISOString().split('T')[0];
+
+    // Today's date and max date
+    const dateInput = document.getElementById('APOD-inputDate');
+    dateInput.setAttribute('max', today);
+    dateInput.value = today;
+    
+    try {
+        const data = await fetchData(today);
+    } catch (error) {
+        console.error('Error fetching APOD data:', error);
+    }
+});
